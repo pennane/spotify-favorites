@@ -42,12 +42,16 @@ export default {
 
 .text {
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .item {
   display: flex;
   padding: 0.5em 0.5em;
   box-shadow: 0 1px 3px rgb(0, 0, 0, 0.15);
+  height: 77px;
+  box-sizing: border-box;
 }
 
 .position {
@@ -67,13 +71,6 @@ export default {
   max-width: 64px;
 }
 
-.name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-}
-
 span,
 p {
   font-weight: 400;
@@ -88,6 +85,11 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
+}
+
+.rightside {
+  flex: 1 1 auto;
+  display: flex;
 }
 
 @media screen and (max-width: 700px) {

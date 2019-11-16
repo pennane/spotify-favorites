@@ -38,10 +38,18 @@ export default {
   background-color: #f3f3f3;
 }
 
+.text {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .item {
   display: flex;
   padding: 0.5em 0.5em;
   box-shadow: 0 1px 3px rgb(0, 0, 0, 0.15);
+  height: 77px;
+  box-sizing: border-box;
 }
 
 .position {
@@ -52,7 +60,6 @@ export default {
 }
 
 .cover-image {
-  float: right;
   margin: 0;
   border: 1px groove black;
   width: calc(0.6em + 3.6vw);
@@ -62,13 +69,10 @@ export default {
   max-width: 64px;
 }
 
-.name {
-  float: left;
-  white-space: nowrap;
-  width: 17vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
+span,
+p {
+  font-weight: 400;
+  font-size: calc(0.6em + 0.43vw);
 }
 
 .track-artist {
@@ -81,14 +85,9 @@ export default {
   display: block;
 }
 
-.text {
-    flex: 1 1 auto;
-}
-
-span,
-p {
-  font-weight: 400;
-  font-size: calc(0.6em + 0.43vw);
+.rightside {
+  flex: 1 1 auto;
+  display: flex;
 }
 
 @media screen and (max-width: 700px) {

@@ -49,39 +49,39 @@
                 :position="track.position"
               />
             </div>
-          </div>
 
-          <div class="artists">
-            <h2>Artists</h2>
-            <div class="shortTerm column">
-              <h3>Short term artists</h3>
-              <Artist
-                v-for="(artist, index) in data.artists.short"
-                :key="index+'-track-short-'+artist.id"
-                :imageUrl="artist.imgurl"
-                :artistName="artist.name"
-                :position="artist.position"
-              />
-            </div>
-            <div class="mediumTerm column">
-              <h3>Medium term artists</h3>
-              <Artist
-                v-for="(artist, index) in data.artists.medium"
-                :key="index+'-track-medium-'+artist.id"
-                :imageUrl="artist.imgurl"
-                :artistName="artist.name"
-                :position="artist.position"
-              />
-            </div>
-            <div class="longTerm column">
-              <h3>Long term artists</h3>
-              <Artist
-                v-for="(artist, index) in data.artists.long"
-                :key="index+'-track-long-'+artist.id"
-                :imageUrl="artist.imgurl"
-                :artistName="artist.name"
-                :position="artist.position"
-              />
+            <div class="artists">
+              <h2>Artists</h2>
+              <div class="shortTerm column">
+                <h3>Short term artists</h3>
+                <Artist
+                  v-for="(artist, index) in data.artists.short"
+                  :key="index+'-track-short-'+artist.id"
+                  :imageUrl="artist.imgurl"
+                  :artistName="artist.name"
+                  :position="artist.position"
+                />
+              </div>
+              <div class="mediumTerm column">
+                <h3>Medium term artists</h3>
+                <Artist
+                  v-for="(artist, index) in data.artists.medium"
+                  :key="index+'-track-medium-'+artist.id"
+                  :imageUrl="artist.imgurl"
+                  :artistName="artist.name"
+                  :position="artist.position"
+                />
+              </div>
+              <div class="longTerm column">
+                <h3>Long term artists</h3>
+                <Artist
+                  v-for="(artist, index) in data.artists.long"
+                  :key="index+'-track-long-'+artist.id"
+                  :imageUrl="artist.imgurl"
+                  :artistName="artist.name"
+                  :position="artist.position"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -156,9 +156,9 @@ export default {
 
 <style scoped>
 .spotifyFavorites {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .data-wrapper {
   display: flex;
