@@ -40,10 +40,6 @@ export default {
   margin-bottom: 2em;
 }
 
-h3 {
-  height: 50px;
-}
-
 h1 {
   letter-spacing: -1.5px;
   font-size: 3em;
