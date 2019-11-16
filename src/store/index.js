@@ -5,11 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    accessToken: null
   },
   mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  },
-});
+    setAccessToken(state, token) {
+      state.accessToken = token
+    }
+  }
+})
