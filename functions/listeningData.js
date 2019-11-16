@@ -4,11 +4,9 @@ const secret = process.env.SPOTIFY_SECRET;
 const redirectUri = process.env.REDIRECT_URI;
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 
-
 function ellapsedFrom(date, msg) {
     console.log(msg + ": " + (Date.now() - date) + " ms")
 }
-
 
 exports.handler = function (event, context, callback) {
 
@@ -18,7 +16,6 @@ exports.handler = function (event, context, callback) {
             statusCode: 500,
             body: "Spotify api not available"
         })
-
     }
 
     const now = Date.now()
@@ -38,7 +35,6 @@ exports.handler = function (event, context, callback) {
 
     spotify.authorizationCodeGrant(code)
         .then(data => {
-            console.log(data)
 
             ellapsedFrom(now, "Granted")
             spotify.setAccessToken(data.body["access_token"])
