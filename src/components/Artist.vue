@@ -1,15 +1,11 @@
 <template>
   <div class="track item">
     <span class="position">{{position}}</span>
-    <div class="text">
-      <img
-        class="cover-image"
-        :src="imageUrl"
-        :alt="'Cover for '+ artistName"
-        width="48"
-        height="48"
-      />
-      <span class="name">{{artistName}}</span>
+    <div class="rightside">
+      <div class="text">
+        <span class="name">{{artistName}}</span>
+      </div>
+      <img class="cover-image" :src="imageUrl" :alt="'Cover for '+ artistName" width="48" height="48"/>
     </div>
   </div>
 </template>
@@ -34,10 +30,6 @@ export default {
 };
 </script>
 <style scoped>
-.item:nth-of-type(even) {
-  background-color: #f3f3f3;
-}
-
 .text {
   flex: 1 1 auto;
   display: flex;
@@ -50,6 +42,12 @@ export default {
   box-shadow: 0 1px 3px rgb(0, 0, 0, 0.15);
   height: 77px;
   box-sizing: border-box;
+  background-color: var(--bg-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.item:nth-of-type(even) {
+  background-color: #f3f3f3;
 }
 
 .position {
@@ -73,16 +71,6 @@ span,
 p {
   font-weight: 400;
   font-size: calc(0.6em + 0.43vw);
-}
-
-.track-artist {
-  float: left;
-  color: #585858;
-  white-space: nowrap;
-  width: 17vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
 }
 
 .rightside {

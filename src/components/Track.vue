@@ -36,7 +36,6 @@ export default {
 </script>
 
 <style scoped>
-
 .text {
   flex: 1 1 auto;
   display: flex;
@@ -50,7 +49,7 @@ export default {
   height: 77px;
   box-sizing: border-box;
   background-color: var(--bg-color);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .item:nth-of-type(even) {

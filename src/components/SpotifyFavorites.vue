@@ -158,8 +158,8 @@ export default {
 </script>
 
 <style scoped>
-.favoritesContent {
-    padding: 0 calc(2vw + .8em) 
+.favorites-content {
+  padding: 0 calc(2vw + 0.8em);
 }
 
 .spotifyFavorites {
@@ -176,7 +176,7 @@ export default {
 .data {
   display: flex;
   max-width: 1300px;
-  padding: 0 calc(2vw + 0.8em);
+  padding: 0;
 }
 
 .column {
@@ -195,5 +195,12 @@ span.name {
 
 h3 {
   height: 50px;
+  margin: 0;
+  margin-top: 0.4em;
+  font-weight: 300;
+}
+
+h2 {
+  font-weight: 600;
 }
 </style>
