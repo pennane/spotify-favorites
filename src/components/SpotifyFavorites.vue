@@ -168,6 +168,10 @@ export default {
   padding: 0 calc(2vw + 0.8em);
 }
 
+.artists {
+  margin-top: 6em;
+}
+
 .spotifyFavorites {
   display: flex;
   flex-direction: column;
@@ -210,6 +214,7 @@ span.termdesc {
   margin-top: 0.5em;
   margin-bottom: 1em;
   display: block;
+  margin-right: 2em;
 }
 
 h2 {
