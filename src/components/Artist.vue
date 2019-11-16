@@ -85,6 +85,12 @@ export default {
     flex: 1 1 auto;
 }
 
+span,
+p {
+  font-weight: 400;
+  font-size: calc(0.6em + 0.43vw);
+}
+
 @media screen and (max-width: 700px) {
   .cover-image {
     display: none;

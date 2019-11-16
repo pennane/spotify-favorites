@@ -1,7 +1,8 @@
 <template>
-  <div class="home">
-    <a v-if="!accessToken" :href="spotifyURL">Login to spotify</a>
+  <div class="spotifyFavorites">
+    <a class="button" v-if="!accessToken" :href="spotifyURL">Login to spotify</a>
     <button
+      class="button"
       v-if="accessToken && !data && !loading"
       @click="getSpotifyData(accessToken)"
     >Get favorite tracks &amp; artists</button>
@@ -52,37 +53,35 @@
 
           <div class="artists">
             <h2>Artists</h2>
-            <div class="data-wrapper">
-              <div class="shortTerm column">
-                <h3>Short term artists</h3>
-                <Artist
-                  v-for="(artist, index) in data.artists.short"
-                  :key="index+'-track-short-'+artist.id"
-                  :imageUrl="artist.imgurl"
-                  :artistName="artist.name"
-                  :position="artist.position"
-                />
-              </div>
-              <div class="mediumTerm column">
-                <h3>Medium term artists</h3>
-                <Artist
-                  v-for="(artist, index) in data.artists.medium"
-                  :key="index+'-track-medium-'+artist.id"
-                  :imageUrl="artist.imgurl"
-                  :artistName="artist.name"
-                  :position="artist.position"
-                />
-              </div>
-              <div class="longTerm column">
-                <h3>Long term artists</h3>
-                <Artist
-                  v-for="(artist, index) in data.artists.long"
-                  :key="index+'-track-long-'+artist.id"
-                  :imageUrl="artist.imgurl"
-                  :artistName="artist.name"
-                  :position="artist.position"
-                />
-              </div>
+            <div class="shortTerm column">
+              <h3>Short term artists</h3>
+              <Artist
+                v-for="(artist, index) in data.artists.short"
+                :key="index+'-track-short-'+artist.id"
+                :imageUrl="artist.imgurl"
+                :artistName="artist.name"
+                :position="artist.position"
+              />
+            </div>
+            <div class="mediumTerm column">
+              <h3>Medium term artists</h3>
+              <Artist
+                v-for="(artist, index) in data.artists.medium"
+                :key="index+'-track-medium-'+artist.id"
+                :imageUrl="artist.imgurl"
+                :artistName="artist.name"
+                :position="artist.position"
+              />
+            </div>
+            <div class="longTerm column">
+              <h3>Long term artists</h3>
+              <Artist
+                v-for="(artist, index) in data.artists.long"
+                :key="index+'-track-long-'+artist.id"
+                :imageUrl="artist.imgurl"
+                :artistName="artist.name"
+                :position="artist.position"
+              />
             </div>
           </div>
         </div>
@@ -108,7 +107,9 @@ export default {
     return {
       spotifyURL: `https://accounts.spotify.com/authorize?response_type=code&client_id=a3e009b8a73a416387140f5830d1862e&scope=${encodeURIComponent(
         "user-read-private user-top-read"
-      )}&redirect_uri=${encodeURIComponent("https://spotifyfavorites.pennanen.dev/")}`,
+      )}&redirect_uri=${encodeURIComponent(
+        "https://spotifyfavorites.pennanen.dev/"
+      )}`,
       loading: null,
       error: null,
       data: null
@@ -154,6 +155,11 @@ export default {
 </script>
 
 <style scoped>
+.spotifyFavorites {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .data-wrapper {
   display: flex;
   justify-content: center;
@@ -179,14 +185,7 @@ span.name {
   align-items: center;
   justify-content: center;
 }
-</style>
 
-<style >
-span,
-p {
-  font-weight: 400;
-  font-size: calc(0.6em + 0.43vw);
-}
 h3 {
   height: 50px;
 }

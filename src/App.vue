@@ -1,14 +1,24 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  color: #2c3e50;
+:root {
+  --bg-line-color: hsla(0, 0%, 63.5%, 0.3);
+  --bg-color:  #fafafa;
 }
 
+#app {
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  color: hsl(154, 20%, 14%);
+}
+
+body {
+  background-color: #fafafa;
+  background-color: var(--bg-color);
+  margin: 0;
+}
 
 </style>
