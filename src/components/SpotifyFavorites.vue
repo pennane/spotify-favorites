@@ -191,6 +191,7 @@ span.name {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 1em 0;
 }
 
 h3 {

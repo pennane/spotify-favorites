@@ -6,9 +6,9 @@
           <h1>Spotify Favorites</h1>
         </header>
         <section class="introduction">
-          <p>Spotify favorites shows stats about what you listen the most on Spotify. Log in using your Spotify account, and you will be presented an array of artists and tracks that you have been listening to the most.</p>
-          <p>The data, both artists and tracks, is divided into three categories. Short term, medium term and long term. The length of the term sets the time frame in which the stats have been calculated of.</p>
-          <p>Short term shows your most listened artist and tracks from the previous few weeks. Whereas medium from the last six months and the long from several years.</p>
+          <p>Spotify favourites show statistics about what you listen the most on Spotify. Log in using your Spotify account, and you will be presented an array of artists and tracks that you have been listening to the most.</p>
+          <p>The data, both artists and tracks, is divided into three categories. Short-term, medium-term and long-term. The length of the term sets the time frame in which the stats have been calculated.</p>
+          <p>The short-term shows your most listened artists and tracks from the previous few weeks. Whereas medium shows from the last six months and the long from several years.</p>
         </section>
       </div>
       <SpotifyFavorites />
@@ -36,7 +36,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1em
+  margin-top: 1em;
+  margin-bottom: 2em;
 }
 
 h3 {
