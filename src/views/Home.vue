@@ -127,7 +127,6 @@ export default {
         .then(response => {
           this.loading = false;
           this.data = response.data;
-          console.log(response.data);
         })
         .catch(err => {
           this.loading = false;
@@ -140,7 +139,6 @@ export default {
   },
   computed: {
     accessToken: function() {
-      console.log(this.$store.state.accessToken);
       return this.$store.state.accessToken;
     }
   },
