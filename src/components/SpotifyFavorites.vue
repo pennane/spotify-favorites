@@ -11,7 +11,7 @@
     </div>
 
     <h1 v-show="error">{{error}}</h1>
-    <div v-if="data">
+    <div class="favorites-content" v-if="data">
       <div class="tracks">
         <h2>Tracks</h2>
         <div class="data-wrapper">
@@ -49,9 +49,12 @@
                 :position="track.position"
               />
             </div>
-
-            <div class="artists">
-              <h2>Artists</h2>
+          </div>
+        </div>
+        <div class="artists">
+          <h2>Artists</h2>
+          <div class="data-wrapper">
+            <div class="data">
               <div class="shortTerm column">
                 <h3>Short term artists</h3>
                 <Artist
@@ -155,6 +158,10 @@ export default {
 </script>
 
 <style scoped>
+.favoritesContent {
+    padding: 0 calc(2vw + .8em) 
+}
+
 .spotifyFavorites {
   display: flex;
   flex-direction: column;
@@ -169,7 +176,7 @@ export default {
 .data {
   display: flex;
   max-width: 1300px;
-  padding: 2em calc(2vw + 0.8em);
+  padding: 0 calc(2vw + 0.8em);
 }
 
 .column {

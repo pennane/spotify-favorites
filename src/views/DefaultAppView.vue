@@ -49,8 +49,9 @@ h1 {
 }
 
 main {
-  margin: 0 calc(1em + 1vw);
+  padding: 0 calc(1em + 1vw);
   z-index: 2;
+  position: relative;
 }
 
 section {
