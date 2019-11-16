@@ -18,6 +18,7 @@
           <div class="data">
             <div class="shortTerm column">
               <h3>Short term tracks</h3>
+              <span>Most listened from the last ~4 weeks</span>
               <Track
                 v-for="(track, index) in data.tracks.short"
                 :key="index+'-track-short-'+track.id"
@@ -29,6 +30,7 @@
             </div>
             <div class="mediumTerm column">
               <h3>Medium term tracks</h3>
+              <span>Most listened from the last ~6 months</span>
               <Track
                 v-for="(track, index) in data.tracks.medium"
                 :key="index+'-track-medium-'+track.id"
@@ -40,6 +42,7 @@
             </div>
             <div class="longTerm column">
               <h3>Long term tracks</h3>
+              <span>Most listened from the last ~few years</span>
               <Track
                 v-for="(track, index) in data.tracks.long"
                 :key="index+'-track-long-'+track.id"
