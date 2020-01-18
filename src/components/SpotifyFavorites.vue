@@ -197,6 +197,7 @@ export default {
 table {
   width: 100%;
   table-layout: fixed;
+  background-color: var(--bg-color);
 }
 
 table,
