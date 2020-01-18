@@ -40,14 +40,21 @@ export default {
   margin-bottom: 2em;
 }
 
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 h1 {
   letter-spacing: -1.5px;
   font-size: 3em;
   font-weight: 700;
+  text-align: center;
 }
 
 main {
-  padding: 0 calc(1em + 1vw);
+  padding: 0 calc(0.1em + 1vw);
   z-index: 2;
   position: relative;
 }
@@ -55,7 +62,7 @@ main {
 section {
   margin: 1em auto 3em auto;
   max-width: 750px;
-  padding: 0 calc(2.5em + 3vw);
+  padding: 0 calc(2vw + 0.8em);
   position: relative;
 }
 

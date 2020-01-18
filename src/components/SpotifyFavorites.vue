@@ -16,42 +16,55 @@
         <h2>Tracks</h2>
         <div class="data-wrapper">
           <div class="data">
-            <div class="shortTerm column">
-              <h3>Short term tracks</h3>
-              <span class="termdesc">Most listened from the last ~4 weeks</span>
-              <Track
-                v-for="(track, index) in data.tracks.short"
-                :key="index+'-track-short-'+track.id"
-                :imageUrl="track.imgurl"
-                :trackName="track.name"
-                :artists="track.artists"
-                :position="track.position"
-              />
-            </div>
-            <div class="mediumTerm column">
-              <h3>Medium term tracks</h3>
-              <span class="termdesc">Most listened from the last ~6 months</span>
-              <Track
-                v-for="(track, index) in data.tracks.medium"
-                :key="index+'-track-medium-'+track.id"
-                :imageUrl="track.imgurl"
-                :trackName="track.name"
-                :artists="track.artists"
-                :position="track.position"
-              />
-            </div>
-            <div class="longTerm column">
-              <h3>Long term tracks</h3>
-              <span class="termdesc">Most listened from the last ~few years</span>
-              <Track
-                v-for="(track, index) in data.tracks.long"
-                :key="index+'-track-long-'+track.id"
-                :imageUrl="track.imgurl"
-                :trackName="track.name"
-                :artists="track.artists"
-                :position="track.position"
-              />
-            </div>
+            <table v-if="data.tracks">
+              <thead>
+                <tr>
+                  <th>
+                    <h3>Short term tracks</h3>
+                    <span class="termdesc">Most listened from the last ~4 weeks</span>
+                  </th>
+                  <th>
+                    <h3>Medium term tracks</h3>
+                    <span class="termdesc">Most listened from the last ~6 months</span>
+                  </th>
+                  <th>
+                    <h3>Long term tracks</h3>
+                    <span class="termdesc">Most listened from the last ~few years</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(n, i) in 50" :key="'track-row-'+i">
+                  <th>
+                    <Track
+                      v-if="data.tracks.short[i]"
+                      :imageUrl="data.tracks.short[i].imgurl"
+                      :trackName="data.tracks.short[i].name"
+                      :artists="data.tracks.short[i].artists"
+                      :position="data.tracks.short[i].position"
+                    />
+                  </th>
+                  <th>
+                    <Track
+                      v-if="data.tracks.medium[i]"
+                      :imageUrl="data.tracks.medium[i].imgurl"
+                      :trackName="data.tracks.medium[i].name"
+                      :artists="data.tracks.medium[i].artists"
+                      :position="data.tracks.medium[i].position"
+                    />
+                  </th>
+                  <th>
+                    <Track
+                      v-if="data.tracks.long[i]"
+                      :imageUrl="data.tracks.long[i].imgurl"
+                      :trackName="data.tracks.long[i].name"
+                      :artists="data.tracks.long[i].artists"
+                      :position="data.tracks.long[i].position"
+                    />
+                  </th>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -59,39 +72,52 @@
         <h2>Artists</h2>
         <div class="data-wrapper">
           <div class="data">
-            <div class="shortTerm column">
-              <h3>Short term artists</h3>
-              <span class="termdesc">Most listened from the last ~4 weeks</span>
-              <Artist
-                v-for="(artist, index) in data.artists.short"
-                :key="index+'-track-short-'+artist.id"
-                :imageUrl="artist.imgurl"
-                :artistName="artist.name"
-                :position="artist.position"
-              />
-            </div>
-            <div class="mediumTerm column">
-              <h3>Medium term artists</h3>
-              <span class="termdesc">Most listened from the last ~6 motnhs</span>
-              <Artist
-                v-for="(artist, index) in data.artists.medium"
-                :key="index+'-track-medium-'+artist.id"
-                :imageUrl="artist.imgurl"
-                :artistName="artist.name"
-                :position="artist.position"
-              />
-            </div>
-            <div class="longTerm column">
-              <h3>Long term artists</h3>
-              <span class="termdesc">Most listened from the last ~few years</span>
-              <Artist
-                v-for="(artist, index) in data.artists.long"
-                :key="index+'-track-long-'+artist.id"
-                :imageUrl="artist.imgurl"
-                :artistName="artist.name"
-                :position="artist.position"
-              />
-            </div>
+            <table v-if="data.artists">
+              <thead>
+                <tr>
+                  <th>
+                    <h3>Short term artists</h3>
+                    <span class="termdesc">Most listened from the last ~4 weeks</span>
+                  </th>
+                  <th>
+                    <h3>Medium term artists</h3>
+                    <span class="termdesc">Most listened from the last ~6 motnhs</span>
+                  </th>
+                  <th>
+                    <h3>Long term artists</h3>
+                    <span class="termdesc">Most listened from the last ~few years</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(n, i) in 50" :key="'artist-row-'+i">
+                  <th>
+                    <Artist
+                      v-if="data.artists.short[i]"
+                      :imageUrl="data.artists.short[i].imgurl"
+                      :artistName="data.artists.short[i].name"
+                      :position="data.artists.short[i].position"
+                    />
+                  </th>
+                  <th>
+                    <Artist
+                      v-if="data.artists.medium[i]"
+                      :imageUrl="data.artists.medium[i].imgurl"
+                      :artistName="data.artists.medium[i].name"
+                      :position="data.artists.medium[i].position"
+                    />
+                  </th>
+                  <th>
+                    <Artist
+                      v-if="data.artists.long[i]"
+                      :imageUrl="data.artists.long[i].imgurl"
+                      :artistName="data.artists.long[i].name"
+                      :position="data.artists.long[i].position"
+                    />
+                  </th>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -106,7 +132,7 @@ import Artist from "@/components/Artist.vue";
 import LoadingBar from "@/components/Loadingbar.vue";
 
 export default {
-  name: "home",
+  name: "SpotifyFavorites",
   components: {
     Track,
     Artist,
@@ -168,6 +194,52 @@ export default {
   padding: 0 calc(2vw + 0.8em);
 }
 
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+table,
+tr,
+th {
+  border-spacing: 0;
+}
+
+thead th {
+  padding-right: 0.4em;
+}
+
+th {
+  font-weight: inherit;
+  text-align: left;
+  box-sizing: border-box;
+  padding: 0;
+  vertical-align: baseline;
+  overflow: hidden;
+}
+
+tbody {
+  font-size: 0.95em;
+}
+
+tbody tr {
+  background-color: var(--bg-color);
+  box-shadow: 0 1px 3px rgb(0, 0, 0, 0.15);
+  min-height: 70px;
+}
+
+tbody th {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+tbody th:last-child {
+  border-right: 0;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
 .artists {
   margin-top: 6em;
 }
@@ -187,6 +259,7 @@ export default {
   display: flex;
   max-width: 1300px;
   padding: 0;
+  flex-direction: column;
 }
 
 .column {
@@ -207,10 +280,9 @@ span.name {
 h3 {
   margin: 0;
   font-weight: 300;
-  white-space: nowrap;
 }
 
-span.termdesc {
+.termdesc {
   margin-top: 0.5em;
   margin-bottom: 1em;
   display: block;

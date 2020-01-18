@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "Track",
   props: {
     position: {
       type: Number,
@@ -45,15 +45,8 @@ export default {
 .item {
   display: flex;
   padding: 0.5em 0.5em;
-  box-shadow: 0 1px 3px rgb(0, 0, 0, 0.15);
-  height: 77px;
   box-sizing: border-box;
-  background-color: var(--bg-color);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.item:nth-of-type(even) {
-  background-color: #f3f3f3;
+      min-height: 63px;
 }
 
 .position {
@@ -71,32 +64,31 @@ export default {
   object-fit: cover;
   max-height: 64px;
   max-width: 64px;
-}
-
-span,
-p {
-  font-weight: 400;
-  font-size: calc(0.6em + 0.43vw);
+   margin-left: 0.5em;
 }
 
 .track-artist {
-  float: left;
   color: #585858;
   white-space: nowrap;
-  width: 17vw;
+  max-width: 14vw;
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
 }
 
 .rightside {
-  flex: 1 1 auto;
+  width: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: end;
 }
 
 @media screen and (max-width: 700px) {
   .cover-image {
     display: none;
+  }
+  .track-artist {
+    min-width: 20vw;
   }
 }
 </style>

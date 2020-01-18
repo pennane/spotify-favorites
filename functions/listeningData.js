@@ -41,11 +41,10 @@ exports.handler = function (event, context, callback) {
             spotify.setRefreshToken(data.body["refresh_token"])
 
             async function topTracks(range) {
-                let i = 0, tracks = {}
+                let i = 0, tracks = [];
                 const trackToObject = item => {
-                    if (tracks[item.id]) return
-                    i++
-                    tracks[item.id] = {
+                    i++;
+                    let track = {
                         id: item.id, name: item.name, uri: item.uri,
                         position: i, url: item.external_urls.spotify,
                         artists: item.artists,
@@ -53,6 +52,7 @@ exports.handler = function (event, context, callback) {
                             ? item.album.images[item.album.images.length - 1].url
                             : "img/nocover.png"
                     }
+                    return track;
                 }
 
                 let topTracks50 = await spotify.getMyTopTracks({
@@ -60,25 +60,26 @@ exports.handler = function (event, context, callback) {
                 })
 
                 await topTracks50.body.items.forEach(item => {
-                    trackToObject(item)
+                    tracks.push(trackToObject(item))
                 })
 
                 return tracks
             }
 
             async function topArtists(range) {
-                let i = 0, artists = {}
+                let i = 0, artists = [];
 
                 const artistToObject = item => {
-                    if (artists[item.id]) return
-                    i++
-                    artists[item.id] = {
+
+                    i++;
+                    let artist = {
                         id: item.id, name: item.name, uri: item.uri,
                         url: item.external_urls.spotify, position: i,
                         imgurl: item.images[0]
                             ? item.images[item.images.length - 1].url
                             : "img/nocover.png"
                     }
+                    return artist;
                 }
 
                 let topArtists50 = await spotify.getMyTopArtists({
@@ -86,7 +87,7 @@ exports.handler = function (event, context, callback) {
                 })
 
                 await topArtists50.body.items.forEach(item => {
-                    artistToObject(item)
+                    artists.push(artistToObject(item))
                 })
 
                 return artists
