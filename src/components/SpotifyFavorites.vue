@@ -152,6 +152,12 @@ export default {
   },
   methods: {
     getSpotifyData(token) {
+      this.$ga.event({
+        eventCategory: "Analyze",
+        eventAction: "Spotify information",
+        eventLabel: "Searched for spotify favorites",
+        eventValue: options.players
+      });
       this.loading = true;
       this.error = null;
       axios
