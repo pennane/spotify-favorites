@@ -5,12 +5,14 @@
       class="button"
       v-if="accessToken && !data && !loading"
       @click="getSpotifyData(accessToken)"
-    >Get favorite tracks &amp; artists</button>
+    >
+      Get favorite tracks &amp; artists
+    </button>
     <div v-show="loading" class="loader-wrapper">
       <LoadingBar />
     </div>
 
-    <h1 v-show="error">{{error}}</h1>
+    <h1 v-show="error">{{ error }}</h1>
     <div class="favorites-content" v-if="data">
       <div class="tracks">
         <h2>Tracks</h2>
@@ -34,7 +36,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(n, i) in 50" :key="'track-row-'+i">
+                <tr v-for="(n, i) in 50" :key="'track-row-' + i">
                   <th>
                     <Track
                       v-if="data.tracks.short[i]"
@@ -90,7 +92,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(n, i) in 50" :key="'artist-row-'+i">
+                <tr v-for="(n, i) in 50" :key="'artist-row-' + i">
                   <th>
                     <Artist
                       v-if="data.artists.short[i]"
@@ -136,18 +138,16 @@ export default {
   components: {
     Track,
     Artist,
-    LoadingBar
+    LoadingBar,
   },
-  data: function() {
+  data: function () {
     return {
       spotifyURL: `https://accounts.spotify.com/authorize?response_type=code&client_id=a3e009b8a73a416387140f5830d1862e&scope=${encodeURIComponent(
         "user-read-private user-top-read"
-      )}&redirect_uri=${encodeURIComponent(
-        "https://spotifyfavorites.pennanen.dev/"
-      )}`,
+      )}&redirect_uri=${encodeURIComponent("https://spotifyfavorites.pennanen.dev/")}`,
       loading: null,
       error: null,
-      data: null
+      data: null,
     };
   },
   methods: {
@@ -156,42 +156,42 @@ export default {
         eventCategory: "Analyze",
         eventAction: "Spotify information",
         eventLabel: "Searched for spotify favorites",
-        eventValue: options.players
+        eventValue: "searching",
       });
       this.loading = true;
       this.error = null;
       axios
         .get(".netlify/functions/listeningData", {
           params: {
-            token: token
-          }
+            token: token,
+          },
         })
-        .then(response => {
+        .then((response) => {
           this.loading = false;
           this.data = response.data;
         })
-        .catch(err => {
+        .catch((err) => {
           this.loading = false;
           this.errror = err;
         });
     },
-    setToken: function(token) {
+    setToken: function (token) {
       this.$store.commit("setAccessToken", token);
-    }
+    },
   },
   computed: {
-    accessToken: function() {
+    accessToken: function () {
       return this.$store.state.accessToken;
-    }
+    },
   },
-  created: function() {
+  created: function () {
     if (this.$route.query && this.$route.query.code) {
       this.setToken(this.$route.query.code);
       let query = Object.assign({}, this.$route.query);
       delete query.code;
       this.$router.replace({ query });
     }
-  }
+  },
 };
 </script>
 
