@@ -1,12 +1,20 @@
 <template>
   <div class="track item">
-    <span class="position">{{position}}</span>
-    <div class="rightside">
-      <div class="text">
-        <span class="name">{{trackName}}</span>
-        <span class="track-artist">{{artists[0].name}}</span>
-      </div>
-      <img class="cover-image" :src="imageUrl" :alt="'Cover of '+ trackName" width="48" height="48" />
+    <div class="position">
+      <span>{{ position }}</span>
+    </div>
+    <div class="middle">
+      <span class="name">{{ trackName }}</span>
+      <span class="artist">{{ artists[0].name }}</span>
+    </div>
+    <div class="art">
+      <img
+        class="cover-image"
+        :src="imageUrl"
+        :alt="'Cover of ' + trackName"
+        width="48"
+        height="48"
+      />
     </div>
   </div>
 </template>
@@ -36,59 +44,58 @@ export default {
 </script>
 
 <style scoped>
-.text {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-}
-
 .item {
   display: flex;
-  padding: 0.5em 0.5em;
-  box-sizing: border-box;
-      min-height: 63px;
+  align-items: start;
+  justify-content: flex-start;
+  padding-bottom: 0.4em;
+  min-height: 63px;
 }
 
-.position {
-  color: #666;
-  margin-right: calc(0.2em + 0.5vw);
-  margin-left: calc(0.5vw);
-  flex-basis: 8%;
+.art {
+  margin-left: auto;
+  padding-left: 0.3em;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.cover-image {
-  margin: 0;
-  border: 1px groove black;
-  width: calc(0.6em + 3.6vw);
-  height: calc(0.6em + 3.6vw);
-  object-fit: cover;
-  max-height: 64px;
-  max-width: 64px;
-   margin-left: 0.5em;
+.middle {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding-top: 0.3em;
 }
 
-.track-artist {
+.artist {
   color: #585858;
   white-space: nowrap;
-  max-width: 14vw;
+  max-width: 20vw;
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
 }
 
-.rightside {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
+.position {
+  color: #666;
+  margin-left: 0.5vw;
+  margin-right: 0.3em;
+  flex-basis: 8%;
+  padding-left: 0.5em;
+  padding-right: 0.1em;
+  padding-top: 0.3em;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 920px) {
   .cover-image {
-    display: none;
+    width: 42px;
+    height: 42px;
   }
-  .track-artist {
-    min-width: 20vw;
+}
+
+@media screen and (max-width: 750px) {
+  .art {
+    display: none;
   }
 }
 </style>

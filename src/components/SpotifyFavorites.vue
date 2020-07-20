@@ -23,15 +23,15 @@
                 <tr>
                   <th>
                     <h3>Short term tracks</h3>
-                    <span class="termdesc">Most listened from the last ~4 weeks</span>
+                    <span class="termdesc">Most listened last ~4 weeks</span>
                   </th>
                   <th>
                     <h3>Medium term tracks</h3>
-                    <span class="termdesc">Most listened from the last ~6 months</span>
+                    <span class="termdesc">Most listened last ~6 months</span>
                   </th>
                   <th>
                     <h3>Long term tracks</h3>
-                    <span class="termdesc">Most listened from the last ~few years</span>
+                    <span class="termdesc">Most listened last ~few years</span>
                   </th>
                 </tr>
               </thead>
@@ -138,16 +138,16 @@ export default {
   components: {
     Track,
     Artist,
-    LoadingBar,
+    LoadingBar
   },
-  data: function () {
+  data: function() {
     return {
       spotifyURL: `https://accounts.spotify.com/authorize?response_type=code&client_id=a3e009b8a73a416387140f5830d1862e&scope=${encodeURIComponent(
         "user-read-private user-top-read"
       )}&redirect_uri=${encodeURIComponent("https://spotifyfavorites.pennanen.dev/")}`,
       loading: null,
       error: null,
-      data: null,
+      data: null
     };
   },
   methods: {
@@ -156,48 +156,48 @@ export default {
         eventCategory: "Analyze",
         eventAction: "Spotify information",
         eventLabel: "Searched for spotify favorites",
-        eventValue: "searching",
+        eventValue: "searching"
       });
       this.loading = true;
       this.error = null;
       axios
         .get(".netlify/functions/listeningData", {
           params: {
-            token: token,
-          },
+            token: token
+          }
         })
-        .then((response) => {
+        .then(response => {
           this.loading = false;
           this.data = response.data;
         })
-        .catch((err) => {
+        .catch(err => {
           this.loading = false;
           this.errror = err;
         });
     },
-    setToken: function (token) {
+    setToken: function(token) {
       this.$store.commit("setAccessToken", token);
-    },
+    }
   },
   computed: {
-    accessToken: function () {
+    accessToken: function() {
       return this.$store.state.accessToken;
-    },
+    }
   },
-  created: function () {
+  created: function() {
     if (this.$route.query && this.$route.query.code) {
       this.setToken(this.$route.query.code);
       let query = Object.assign({}, this.$route.query);
       delete query.code;
       this.$router.replace({ query });
     }
-  },
+  }
 };
 </script>
 
 <style scoped>
 .favorites-content {
-  padding: 0 calc(2vw + 0.8em);
+  padding: 0 calc(2.5vw + 0.2em);
 }
 
 table {
@@ -236,15 +236,21 @@ tbody tr {
 }
 
 tbody th {
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 tbody th:last-child {
   border-right: 0;
 }
 
 tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
+  background-color: hsl(0, 0%, 97%);
+}
+
+.tracks,
+.artists {
+  padding: 0.2em 0;
+  background-color: var(--bg-color);
 }
 
 .artists {
@@ -255,6 +261,7 @@ tbody tr:nth-of-type(even) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 3em;
 }
 .data-wrapper {
   display: flex;
@@ -291,7 +298,7 @@ h3 {
 
 .termdesc {
   margin-top: 0.5em;
-  margin-bottom: 1em;
+  margin-bottom: 1.4em;
   display: block;
   margin-right: 2em;
 }

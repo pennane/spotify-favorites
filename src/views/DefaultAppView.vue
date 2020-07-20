@@ -6,9 +6,14 @@
           <h1>Spotify Favorites</h1>
         </header>
         <section class="introduction">
-          <p>Spotify favourites show statistics about what you listen the most on Spotify. Log in using your Spotify account, and you will be presented an array of artists and tracks that you have been listening to the most.</p>
-          <p>The data, both artists and tracks, is divided into three categories. Short-term, medium-term and long-term. The length of the term sets the time frame in which the stats have been calculated.</p>
-          <p>The short-term shows your most listened artists and tracks from the previous few weeks. Whereas medium shows from the last six months and the long from several years.</p>
+          <p>
+            Display your most listened tracks and artists from Spotify. See what you have been
+            listening to the most!
+          </p>
+          <p>
+            The listening time is shown in three different ranges: last 2 weeks, last 6 months and
+            last few years.
+          </p>
         </section>
       </div>
       <SpotifyFavorites />
@@ -79,15 +84,16 @@ section {
 }
 
 .introduction {
-  line-height: 1.5;
-  font-size: 1.1em;
+  line-height: 1.55;
+  font-size: 1.13em;
   font-weight: 300;
   margin: 0;
   background-color: var(--bg-color);
+  max-width: 580px;
 }
 
 .button {
-  background-color: #2c92ff;
+  background-color: #0466ff;
   color: white;
   font-size: 1.1em;
   padding: 0.9em 1em;

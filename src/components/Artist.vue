@@ -1,14 +1,16 @@
 <template>
   <div class="track item">
-    <span class="position">{{position}}</span>
-    <div class="rightside">
-      <div class="text">
-        <span class="name">{{artistName}}</span>
-      </div>
+    <div class="position">
+      <span>{{ position }}</span>
+    </div>
+    <div class="middle">
+      <span class="artist">{{ artistName }}</span>
+    </div>
+    <div class="art">
       <img
         class="cover-image"
         :src="imageUrl"
-        :alt="'Cover for '+ artistName"
+        :alt="'Cover for ' + artistName"
         width="48"
         height="48"
       />
@@ -36,55 +38,63 @@ export default {
 };
 </script>
 <style scoped>
-.text {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-}
-
 .item {
   display: flex;
-  padding: 0.5em 0.5em;
-  height: 77px;
-  box-sizing: border-box;
-      min-height: 63px;
+  align-items: start;
+  justify-content: flex-start;
+  min-height: 63px;
 }
 
-.name {
+.art {
+  margin-left: auto;
+  padding-left: 0.3em;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.middle {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding-top: 0.3em;
+  padding-bottom: 0.2em;
+}
+
+.artist {
+  color: #585858;
+  white-space: nowrap;
   max-width: 14vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .position {
   color: #666;
-  margin-right: calc(0.2em + 0.5vw);
-  margin-left: calc(0.5vw);
+  margin-left: 0.5vw;
   flex-basis: 8%;
+  padding-left: 0.5em;
+  padding-right: 0.1em;
+  padding-top: 0.3em;
 }
 
-.cover-image {
-  margin: 0;
-  border: 1px groove black;
-  width: calc(0.6em + 3.6vw);
-  height: calc(0.6em + 3.6vw);
-  object-fit: cover;
-  max-height: 64px;
-  max-width: 64px;
-  margin-left: 0.5em;
-}
-
-.rightside {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-}
-
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 920px) {
   .cover-image {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .art {
     display: none;
   }
-    .name {
-    min-width: 20vw;
+  .artist {
+    max-width: none;
+    overflow: auto;
+    text-overflow: unset;
+    margin-right: 0.2em;
   }
 }
 </style>
