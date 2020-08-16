@@ -93,6 +93,8 @@ section {
 }
 
 .button {
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
   background-color: #1968e6;
   color: white;
   font-size: 1.1em;
@@ -101,7 +103,6 @@ section {
   border-radius: 2em;
   box-shadow: 0 1px 3px rgb(0, 0, 0, 0.15);
   text-transform: capitalize;
-  font-weight: 600;
   text-shadow: 0 1px 3px rgb(0, 0, 0, 0.15);
   transition: background-color 0.2s, text-shadow 0.2s;
   border: none;

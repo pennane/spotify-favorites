@@ -134,7 +134,7 @@ export default {
     return {
       spotifyURL: `https://accounts.spotify.com/authorize?response_type=code&client_id=a3e009b8a73a416387140f5830d1862e&scope=${encodeURIComponent(
         "user-read-private user-top-read"
-      )}&redirect_uri=${encodeURIComponent("http://localhost:8888/")}`,
+      )}&redirect_uri=${encodeURIComponent("https://spotifyfavorites.pennanen.dev/")}`,
       loading: null,
       error: null,
       data: null
