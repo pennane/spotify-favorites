@@ -49,7 +49,12 @@ export default {
   align-items: start;
   justify-content: flex-start;
   padding-bottom: 0.4em;
-  min-height: 63px;
+  min-height: 58px;
+  padding-top: 7px;
+}
+
+.cover-image {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
 .art {
@@ -69,10 +74,6 @@ export default {
 
 .artist {
   color: #585858;
-  white-space: nowrap;
-  max-width: 20vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
   display: block;
 }
 
@@ -84,18 +85,5 @@ export default {
   padding-left: 0.5em;
   padding-right: 0.1em;
   padding-top: 0.3em;
-}
-
-@media screen and (max-width: 920px) {
-  .cover-image {
-    width: 42px;
-    height: 42px;
-  }
-}
-
-@media screen and (max-width: 750px) {
-  .art {
-    display: none;
-  }
 }
 </style>

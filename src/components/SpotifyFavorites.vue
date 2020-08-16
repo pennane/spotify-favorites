@@ -18,26 +18,11 @@
         <h2>Tracks</h2>
         <div class="data-wrapper">
           <div class="data">
-            <table v-if="data.tracks">
-              <thead>
-                <tr>
-                  <th>
-                    <h3>Short term tracks</h3>
-                    <span class="termdesc">Most listened last ~4 weeks</span>
-                  </th>
-                  <th>
-                    <h3>Medium term tracks</h3>
-                    <span class="termdesc">Most listened last ~6 months</span>
-                  </th>
-                  <th>
-                    <h3>Long term tracks</h3>
-                    <span class="termdesc">Most listened last ~few years</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(n, i) in 50" :key="'track-row-' + i">
-                  <th>
+            <Tabs v-if="data.tracks">
+              <Tab title="Short term">
+                <div class="short-term-tracks">
+                  <span class="termdesc">Most listened last ~4 weeks</span>
+                  <div class="item-wrapper" v-for="(n, i) in 50" :key="'track-row-' + i">
                     <Track
                       v-if="data.tracks.short[i]"
                       :imageUrl="data.tracks.short[i].imgurl"
@@ -45,8 +30,14 @@
                       :artists="data.tracks.short[i].artists"
                       :position="data.tracks.short[i].position"
                     />
-                  </th>
-                  <th>
+                  </div>
+                </div>
+              </Tab>
+              <Tab title="Medium term">
+                <div class="medium-term-tracks">
+                  <span class="termdesc">Most listened last ~6 months</span>
+
+                  <div class="item-wrapper" v-for="(n, i) in 50" :key="'track-row-' + i">
                     <Track
                       v-if="data.tracks.medium[i]"
                       :imageUrl="data.tracks.medium[i].imgurl"
@@ -54,8 +45,12 @@
                       :artists="data.tracks.medium[i].artists"
                       :position="data.tracks.medium[i].position"
                     />
-                  </th>
-                  <th>
+                  </div></div
+              ></Tab>
+              <Tab title="Long term">
+                <div class="long-term-tracks">
+                  <span class="termdesc">Most listened last ~few years</span>
+                  <div class="item-wrapper" v-for="(n, i) in 50" :key="'track-row-' + i">
                     <Track
                       v-if="data.tracks.long[i]"
                       :imageUrl="data.tracks.long[i].imgurl"
@@ -63,10 +58,11 @@
                       :artists="data.tracks.long[i].artists"
                       :position="data.tracks.long[i].position"
                     />
-                  </th>
-                </tr>
-              </tbody>
-            </table>
+                  </div>
+                </div>
+              </Tab>
+            </Tabs>
+            <div class="track-tabs" v-if="data.tracks"></div>
           </div>
         </div>
       </div>
@@ -74,52 +70,42 @@
         <h2>Artists</h2>
         <div class="data-wrapper">
           <div class="data">
-            <table v-if="data.artists">
-              <thead>
-                <tr>
-                  <th>
-                    <h3>Short term artists</h3>
-                    <span class="termdesc">Most listened from the last ~4 weeks</span>
-                  </th>
-                  <th>
-                    <h3>Medium term artists</h3>
-                    <span class="termdesc">Most listened from the last ~6 motnhs</span>
-                  </th>
-                  <th>
-                    <h3>Long term artists</h3>
-                    <span class="termdesc">Most listened from the last ~few years</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(n, i) in 50" :key="'artist-row-' + i">
-                  <th>
-                    <Artist
-                      v-if="data.artists.short[i]"
-                      :imageUrl="data.artists.short[i].imgurl"
-                      :artistName="data.artists.short[i].name"
-                      :position="data.artists.short[i].position"
-                    />
-                  </th>
-                  <th>
-                    <Artist
-                      v-if="data.artists.medium[i]"
-                      :imageUrl="data.artists.medium[i].imgurl"
-                      :artistName="data.artists.medium[i].name"
-                      :position="data.artists.medium[i].position"
-                    />
-                  </th>
-                  <th>
-                    <Artist
-                      v-if="data.artists.long[i]"
-                      :imageUrl="data.artists.long[i].imgurl"
-                      :artistName="data.artists.long[i].name"
-                      :position="data.artists.long[i].position"
-                    />
-                  </th>
-                </tr>
-              </tbody>
-            </table>
+            <Tabs v-if="data.artists">
+              <Tab title="Short term">
+                <span class="termdesc">Most listened from the last ~4 weeks</span>
+                <div class="item-wrapper" v-for="(n, i) in 50" :key="'artist-row-' + i">
+                  <Artist
+                    v-if="data.artists.short[i]"
+                    :imageUrl="data.artists.short[i].imgurl"
+                    :artistName="data.artists.short[i].name"
+                    :position="data.artists.short[i].position"
+                  />
+                </div>
+              </Tab>
+              <Tab title="Medium term">
+                <span class="termdesc">Most listened from the last ~6 motnhs</span>
+
+                <div v-for="(n, i) in 50" :key="'artist-row-' + i">
+                  <Artist
+                    v-if="data.artists.medium[i]"
+                    :imageUrl="data.artists.medium[i].imgurl"
+                    :artistName="data.artists.medium[i].name"
+                    :position="data.artists.medium[i].position"
+                  />
+                </div>
+              </Tab>
+              <Tab title="Long term">
+                <span class="termdesc">Most listened from the last ~few years</span>
+                <div v-for="(n, i) in 50" :key="'artist-row-' + i">
+                  <Artist
+                    v-if="data.artists.long[i]"
+                    :imageUrl="data.artists.long[i].imgurl"
+                    :artistName="data.artists.long[i].name"
+                    :position="data.artists.long[i].position"
+                  />
+                </div>
+              </Tab>
+            </Tabs>
           </div>
         </div>
       </div>
@@ -132,19 +118,23 @@ import axios from "axios";
 import Track from "@/components/Track.vue";
 import Artist from "@/components/Artist.vue";
 import LoadingBar from "@/components/Loadingbar.vue";
+import Tabs from "@/components/Tabs.vue";
+import Tab from "@/components/Tab.vue";
 
 export default {
   name: "SpotifyFavorites",
   components: {
     Track,
     Artist,
-    LoadingBar
+    LoadingBar,
+    Tabs,
+    Tab
   },
   data: function() {
     return {
       spotifyURL: `https://accounts.spotify.com/authorize?response_type=code&client_id=a3e009b8a73a416387140f5830d1862e&scope=${encodeURIComponent(
         "user-read-private user-top-read"
-      )}&redirect_uri=${encodeURIComponent("https://spotifyfavorites.pennanen.dev/")}`,
+      )}&redirect_uri=${encodeURIComponent("http://localhost:8888/")}`,
       loading: null,
       error: null,
       data: null
@@ -198,52 +188,25 @@ export default {
 <style scoped>
 .favorites-content {
   padding: 0 calc(2.5vw + 0.2em);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-table {
-  width: 100%;
-  table-layout: fixed;
+.data {
   background-color: var(--bg-color);
 }
 
-table,
-tr,
-th {
-  border-spacing: 0;
-}
-
-thead th {
-  padding-right: 0.4em;
-}
-
-th {
-  font-weight: inherit;
-  text-align: left;
-  box-sizing: border-box;
-  padding: 0;
-  vertical-align: baseline;
-  overflow: hidden;
-}
-
-tbody {
-  font-size: 0.95em;
-}
-
-tbody tr {
+.item-wrapper {
   background-color: var(--bg-color);
-  box-shadow: 0 1px 3px rgb(0, 0, 0, 0.15);
-  min-height: 70px;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.03);*/
 }
 
-tbody th {
-  border-right: 1px solid rgba(0, 0, 0, 0.05);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-tbody th:last-child {
-  border-right: 0;
+.item-wrapper:last-child {
+  border-bottom: none;
 }
 
-tbody tr:nth-of-type(even) {
+.item-wrapper:nth-of-type(even) {
   background-color: hsl(0, 0%, 97%);
 }
 
@@ -251,6 +214,9 @@ tbody tr:nth-of-type(even) {
 .artists {
   padding: 0.2em 0;
   background-color: var(--bg-color);
+  width: 550px;
+  max-width: 90vw;
+  box-sizing: border-box;
 }
 
 .artists {
