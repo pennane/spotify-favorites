@@ -1,14 +1,64 @@
 const SpotifyApi = require('spotify-web-api-node')
-
 const secret = process.env.SPOTIFY_SECRET;
 const redirectUri = process.env.REDIRECT_URI;
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 
-function ellapsedFrom(date, msg) {
-    console.log(msg + ": " + (Date.now() - date) + " ms")
+
+const trackToObject = (item, i) => {
+    return {
+        id: item.id,
+        name: item.name,
+        uri: item.uri,
+        position: i + 1,
+        url: item.external_urls.spotify,
+        artists: item.artists,
+        imgurl: item.album.images[0]
+            ? item.album.images[item.album.images.length - 1].url
+            : "img/nocover.png"
+    };
 }
 
-exports.handler = function (event, context, callback) {
+const artistToObject = (item, i) => {
+    return {
+        id: item.id,
+        name: item.name,
+        uri: item.uri,
+        url: item.external_urls.spotify,
+        position: i + 1,
+        imgurl: item.images[0]
+            ? item.images[item.images.length - 1].url
+            : "img/nocover.png"
+    };
+}
+
+async function fetchTopTracks(spotify, range) {
+    let tracks = [];
+    let topTracks = await spotify.getMyTopTracks({
+        limit: 50, time_range: range
+    })
+
+    topTracks.body.items.forEach((item, i) => {
+        tracks.push(trackToObject(item, i))
+    })
+
+    return tracks
+}
+
+async function fetchTopArtists(spotify, range) {
+    let artists = [];
+
+    let topArtists = await spotify.getMyTopArtists({
+        limit: 50, time_range: range
+    })
+
+    topArtists.body.items.forEach((item, i) => {
+        artists.push(artistToObject(item, i))
+    })
+
+    return artists
+}
+
+exports.handler = async function (event, context, callback) {
 
     if (!secret || !redirectUri || !clientId) {
         console.log("ENV VARIABLES ARE MISSING")
@@ -18,13 +68,11 @@ exports.handler = function (event, context, callback) {
         })
     }
 
-    const now = Date.now()
-    const code = event.queryStringParameters.token
-    ellapsedFrom(now, "start")
+    const token = event.queryStringParameters.token
 
-    if (!code) return callback(null, {
+    if (!token) return callback(null, {
         statusCode: 200,
-        body: "Code not received"
+        body: "token not received"
     });
 
     const spotify = new SpotifyApi({
@@ -33,96 +81,43 @@ exports.handler = function (event, context, callback) {
         redirectUri: redirectUri
     })
 
-    spotify.authorizationCodeGrant(code)
-        .then(data => {
+    const authorization = await spotify.authorizationCodeGrant(await token)
 
-            ellapsedFrom(now, "Granted")
-            spotify.setAccessToken(data.body["access_token"])
-            spotify.setRefreshToken(data.body["refresh_token"])
+    spotify.setAccessToken(authorization.body["access_token"])
 
-            async function topTracks(range) {
-                let i = 0, tracks = [];
-                const trackToObject = item => {
-                    i++;
-                    let track = {
-                        id: item.id, name: item.name, uri: item.uri,
-                        position: i, url: item.external_urls.spotify,
-                        artists: item.artists,
-                        imgurl: item.album.images[0]
-                            ? item.album.images[item.album.images.length - 1].url
-                            : "img/nocover.png"
-                    }
-                    return track;
-                }
+    spotify.setRefreshToken(authorization.body["refresh_token"])
 
-                let topTracks50 = await spotify.getMyTopTracks({
-                    limit: 50, time_range: range
-                })
+    try {
+        await spotify.getMe()
 
-                await topTracks50.body.items.forEach(item => {
-                    tracks.push(trackToObject(item))
-                })
+        let tracks = {
+            short: await fetchTopTracks(spotify, "short_term"),
+            medium: await fetchTopTracks(spotify, "medium_term"),
+            long: await fetchTopTracks(spotify, "long_term")
+        }
 
-                return tracks
-            }
+        let artists = {
+            short: await fetchTopArtists(spotify, "short_term"),
+            medium: await fetchTopArtists(spotify, "medium_term"),
+            long: await fetchTopArtists(spotify, "long_term")
+        }
 
-            async function topArtists(range) {
-                let i = 0, artists = [];
-
-                const artistToObject = item => {
-
-                    i++;
-                    let artist = {
-                        id: item.id, name: item.name, uri: item.uri,
-                        url: item.external_urls.spotify, position: i,
-                        imgurl: item.images[0]
-                            ? item.images[item.images.length - 1].url
-                            : "img/nocover.png"
-                    }
-                    return artist;
-                }
-
-                let topArtists50 = await spotify.getMyTopArtists({
-                    limit: 50, time_range: range
-                })
-
-                await topArtists50.body.items.forEach(item => {
-                    artists.push(artistToObject(item))
-                })
-
-                return artists
-            }
-
-            spotify.getMe()
-                .then(async () => {
-                    ellapsedFrom(now, "got me")
-                    let tracks = {
-                        short: await topTracks("short_term"),
-                        medium: await topTracks("medium_term"),
-                        long: await topTracks("long_term")
-                    }
-                    let artists = {
-                        short: await topArtists("short_term"),
-                        medium: await topArtists("medium_term"),
-                        long: await topArtists("long_term")
-                    }
-                    ellapsedFrom(now, "got tracks")
-                    callback(null, {
-                        statusCode: 200,
-                        body: JSON.stringify({ tracks, artists, refresh_token: data.body.refresh_token })
-                    });
-                    ellapsedFrom(now, "sent response")
-                })
-                .catch(err => callback(null, {
-                    statusCode: 500,
-                    body: "err" + JSON.stringify(err)
-                }))
-        })
-        .catch(err => {
-            callback(null, {
-                statusCode: 500,
-                body: "err" + JSON.stringify(err)
+        callback(null, {
+            statusCode: 200,
+            body: JSON.stringify({
+                tracks: await tracks,
+                artists: await artists,
+                refresh_token: authorization.body.refresh_token
             })
-            console.log(err)
         })
+
+    } catch (err) {
+        console.log(err)
+        callback(null, {
+            statusCode: 500,
+            body: "error"
+        })
+    }
+
+
 }

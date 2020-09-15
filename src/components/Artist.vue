@@ -1,10 +1,7 @@
 <template>
-  <div class="track item">
+  <div :class="'artist item '+ positionClass"  :title='artistName'>
     <div class="position">
       <span>{{ position }}</span>
-    </div>
-    <div class="middle">
-      <span class="artist">{{ artistName }}</span>
     </div>
     <div class="art">
       <img
@@ -34,49 +31,45 @@ export default {
       type: String,
       required: true
     }
+  },
+  computed: {
+    positionClass: function() {
+      if (this.position <= 3) {
+        return "topThree";
+      } else if (this.position <= 10) {
+        return "topTen";
+      } else {
+        return "";
+      }
+    }
   }
 };
 </script>
 <style scoped>
-.item {
+.artist {
   display: flex;
-  align-items: start;
-  justify-content: flex-start;
-  min-height: 58px;
-  padding-top: 7px;
-}
-
-.cover-image {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-}
-
-.art {
-  margin-left: auto;
-  padding-left: 0.3em;
-  flex: 1;
-  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   justify-content: flex-end;
 }
 
-.middle {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  padding-top: 0.3em;
-  padding-bottom: 0.2em;
+.art {
+  box-sizing: border-box;
+  padding: 0.2em;
+  width: 90px;
+  height: 90px;
 }
 
-.artist {
-  color: #585858;
+.cover-image {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
 .position {
   color: #666;
-  margin-left: 0.5vw;
-  flex-basis: 8%;
-  padding-left: 0.5em;
-  padding-right: 0.1em;
-  padding-top: 0.3em;
+  text-align: center;
 }
 </style>
