@@ -75,7 +75,7 @@
               <Tab title="Short term">
                 <span class="termdesc">Most listened from the last ~4 weeks</span>
                 <div v-if="data.artists.short" class="artists-wrapper">
-                  <div v-for="(n, i) in 50" class="artist-wrapper">
+                  <div v-for="(n, i) in 50" class="artist-wrapper" :key="i + '-short-artist'">
                     <Artist
                       v-if="data.artists.short[i]"
                       :key="'artist-row-' + i"
@@ -89,7 +89,7 @@
               <Tab title="Medium term">
                 <span class="termdesc">Most listened from the last ~6 motnhs</span>
                 <div v-if="data.artists.medium" class="artists-wrapper">
-                  <div v-for="(n, i) in 50" class="artist-wrapper">
+                  <div v-for="(n, i) in 50" class="artist-wrapper" :key="i + '-medium-artist'">
                     <Artist
                       v-if="data.artists.medium[i]"
                       :key="'artist-row-' + i"
@@ -103,14 +103,15 @@
               <Tab title="Long term">
                 <span class="termdesc">Most listened from the last ~few years</span>
                 <div v-if="data.artists.long" class="artists-wrapper">
-                  <div v-for="(n, i) in 50" class="artist-wrapper">
+                  <div v-for="(n, i) in 50" class="artist-wrapper" :key="i + '-long-artist'">
                     <Artist
-                     v-if="data.artists.long[i]"
-                    :key="'artist-row-' + i"
-                    :imageUrl="data.artists.long[i].imgurl"
-                    :artistName="data.artists.long[i].name"
-                    :position="data.artists.long[i].position"
-                  />
+                      v-if="data.artists.long[i]"
+                      :key="'artist-row-' + i"
+                      :imageUrl="data.artists.long[i].imgurl"
+                      :artistName="data.artists.long[i].name"
+                      :position="data.artists.long[i].position"
+                    />
+                  </div>
                 </div>
               </Tab>
             </Tabs>
