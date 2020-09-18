@@ -5,7 +5,9 @@
       class="button"
       v-if="accessToken && !data && !loading"
       @click="getSpotifyData(accessToken)"
-    >Get favorite tracks &amp; artists</button>
+    >
+      Get favorite tracks &amp; artists
+    </button>
     <div v-show="loading" class="loader-wrapper">
       <LoadingBar />
     </div>
@@ -18,7 +20,7 @@
           <div class="data">
             <Tabs v-if="data.tracks">
               <Tab title="Short term">
-                <div class="short-term-tracks">
+                <div v-if="data.tracks.short" class="short-term-tracks">
                   <span class="termdesc">Most listened last ~4 weeks</span>
                   <div class="track-wrapper" v-for="(n, i) in 50" :key="'track-row-' + i">
                     <Track
@@ -72,33 +74,38 @@
             <Tabs v-if="data.artists">
               <Tab title="Short term">
                 <span class="termdesc">Most listened from the last ~4 weeks</span>
-                <div class="artists-wrapper">
-                  <Artist
-                    v-for="(n, i) in 50"
-                    :key="'artist-row-' + i"
-                    :imageUrl="data.artists.short[i].imgurl"
-                    :artistName="data.artists.short[i].name"
-                    :position="data.artists.short[i].position"
-                  />
+                <div v-if="data.artists.short" class="artists-wrapper">
+                  <div v-for="(n, i) in 50" class="artist-wrapper">
+                    <Artist
+                      v-if="data.artists.short[i]"
+                      :key="'artist-row-' + i"
+                      :imageUrl="data.artists.short[i].imgurl"
+                      :artistName="data.artists.short[i].name"
+                      :position="data.artists.short[i].position"
+                    />
+                  </div>
                 </div>
               </Tab>
               <Tab title="Medium term">
                 <span class="termdesc">Most listened from the last ~6 motnhs</span>
-                <div class="artists-wrapper">
-                  <Artist
-                    v-for="(n, i) in 50"
-                    :key="'artist-row-' + i"
-                    :imageUrl="data.artists.medium[i].imgurl"
-                    :artistName="data.artists.medium[i].name"
-                    :position="data.artists.medium[i].position"
-                  />
+                <div v-if="data.artists.medium" class="artists-wrapper">
+                  <div v-for="(n, i) in 50" class="artist-wrapper">
+                    <Artist
+                      v-if="data.artists.medium[i]"
+                      :key="'artist-row-' + i"
+                      :imageUrl="data.artists.medium[i].imgurl"
+                      :artistName="data.artists.medium[i].name"
+                      :position="data.artists.medium[i].position"
+                    />
+                  </div>
                 </div>
               </Tab>
               <Tab title="Long term">
                 <span class="termdesc">Most listened from the last ~few years</span>
-                <div class="artists-wrapper">
-                  <Artist
-                    v-for="(n, i) in 50"
+                <div v-if="data.artists.long" class="artists-wrapper">
+                  <div v-for="(n, i) in 50" class="artist-wrapper">
+                    <Artist
+                     v-if="data.artists.long[i]"
                     :key="'artist-row-' + i"
                     :imageUrl="data.artists.long[i].imgurl"
                     :artistName="data.artists.long[i].name"
