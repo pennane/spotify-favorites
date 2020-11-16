@@ -1,10 +1,11 @@
 <template>
-  <div :class="'artist item '+ positionClass"  :title='artistName'>
+  <div class="artist item" :title="artistName">
     <div class="position">
       <span>{{ position }}</span>
     </div>
     <div class="art">
       <img
+        @click="closed = false"
         class="cover-image"
         :src="imageUrl"
         :alt="'Cover for ' + artistName"
@@ -12,12 +13,21 @@
         height="48"
       />
     </div>
+    <div v-if="!closed" class="artist-modal" v-scroll-lock="!closed">
+      <img :src="imageUrl" :alt="'Cover for ' + artistName" v-click-outside="onClickOutside" />
+      <span>{{ artistName }}</span>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Artist",
+  data() {
+    return {
+      closed: true
+    };
+  },
   props: {
     position: {
       type: Number,
@@ -32,15 +42,12 @@ export default {
       required: true
     }
   },
-  computed: {
-    positionClass: function() {
-      if (this.position <= 3) {
-        return "topThree";
-      } else if (this.position <= 10) {
-        return "topTen";
-      } else {
-        return "";
-      }
+  methods: {
+    openArtist: function() {
+      this.closed = false;
+    },
+    onClickOutside() {
+      this.closed = true;
     }
   }
 };
@@ -61,8 +68,7 @@ export default {
 }
 
 .cover-image {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   width: 100%;
   height: 100%;
   display: block;
@@ -71,5 +77,32 @@ export default {
 .position {
   color: #666;
   text-align: center;
+}
+
+.artist-modal {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 1em;
+  box-sizing: border-box;
+  text-align: center !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.artist-modal img {
+  max-height: 60vh;
+  max-width: 90vw;
+  object-fit: contain;
+}
+.artist-modal span {
+  text-align: center;
+  font-weight: 200;
+  color: white;
 }
 </style>

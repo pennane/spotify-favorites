@@ -4,6 +4,12 @@ import router from './router';
 import store from './store';
 
 import VueAnalytics from 'vue-analytics'
+import vClickOutside from 'v-click-outside'
+import VScrollLock from 'v-scroll-lock'
+
+Vue.use(VScrollLock)
+
+Vue.use(vClickOutside)
 
 Vue.config.productionTip = false;
 
