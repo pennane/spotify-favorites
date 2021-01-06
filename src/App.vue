@@ -7,7 +7,7 @@
 <style>
 :root {
   --bg-line-color: hsla(0, 0%, 63.5%, 0.3);
-  --bg-color:  #fafafa;
+  --bg-color: #fafafa;
 }
 
 #app {
@@ -20,5 +20,4 @@ body {
   background-color: var(--bg-color);
   margin: 0;
 }
-
 </style>

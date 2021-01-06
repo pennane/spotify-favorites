@@ -31,20 +31,8 @@ export default {
   name: "home",
   components: {
     SpotifyFavorites,
-    BackgroundLines
+    BackgroundLines,
   },
-  methods: {
-    track() {
-      this.$ga.page({
-        page: "/",
-        title: "Spotifyfavorites homepage",
-        location: window.location.href
-      });
-    },
-    created() {
-      this.track();
-    }
-  }
 };
 </script>
 

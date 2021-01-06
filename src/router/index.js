@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'spotify favorites',
     component: DefaultAppView,
   }
 ];
