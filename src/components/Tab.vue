@@ -1,23 +1,27 @@
-<template lang="html">
-  <div class="tab" v-show="isActive">
-    <slot></slot>
-  </div>
+<template>
+    <transition name="tab-slide" mode="out-in">
+        <div class="tab" v-show="isActive">
+            <slot></slot>
+        </div>
+    </transition>
 </template>
 
 <script>
 export default {
-  props: {
-    title: {
-      type: String,
-      default: "Tab"
+    props: {
+        title: {
+            type: String,
+            default: 'Tab'
+        }
+    },
+    data() {
+        return {
+            isActive: false,
+            current: null,
+            direction: 'left'
+        }
     }
-  },
-  data() {
-    return {
-      isActive: false
-    };
-  }
-};
+}
 </script>
 
-<style lang="css"></style>
+<style lang="scss"></style>

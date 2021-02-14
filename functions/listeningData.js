@@ -1,8 +1,7 @@
 const SpotifyApi = require('spotify-web-api-node')
-const secret = process.env.SPOTIFY_SECRET;
-const redirectUri = process.env.REDIRECT_URI;
-const clientId = process.env.SPOTIFY_CLIENT_ID;
-
+const redirectUri = process.env.REDIRECT_URI
+const clientId = process.env.SPOTIFY_CLIENT_ID
+const secret = process.env.SPOTIFY_SECRET
 
 const trackToObject = (item, i) => {
     return {
@@ -12,10 +11,8 @@ const trackToObject = (item, i) => {
         position: i + 1,
         url: item.external_urls.spotify,
         artists: item.artists,
-        imgurl: item.album.images[0]
-            ? item.album.images[item.album.images.length - 1].url
-            : "img/nocover.png"
-    };
+        imgurl: item.album.images[0] ? item.album.images[item.album.images.length - 1].url : 'img/nocover.png'
+    }
 }
 
 const artistToObject = (item, i) => {
@@ -25,16 +22,15 @@ const artistToObject = (item, i) => {
         uri: item.uri,
         url: item.external_urls.spotify,
         position: i + 1,
-        imgurl: item.images[0]
-            ? item.images[item.images.length - 1].url
-            : "img/nocover.png"
-    };
+        imgurl: item.images[0] ? item.images[item.images.length - 1].url : 'img/nocover.png'
+    }
 }
 
 async function fetchTopTracks(spotify, range) {
-    let tracks = [];
+    let tracks = []
     let topTracks = await spotify.getMyTopTracks({
-        limit: 50, time_range: range
+        limit: 50,
+        time_range: range
     })
 
     topTracks.body.items.forEach((item, i) => {
@@ -45,10 +41,11 @@ async function fetchTopTracks(spotify, range) {
 }
 
 async function fetchTopArtists(spotify, range) {
-    let artists = [];
+    let artists = []
 
     let topArtists = await spotify.getMyTopArtists({
-        limit: 50, time_range: range
+        limit: 50,
+        time_range: range
     })
 
     topArtists.body.items.forEach((item, i) => {
@@ -59,21 +56,21 @@ async function fetchTopArtists(spotify, range) {
 }
 
 exports.handler = async function (event, context, callback) {
-
     if (!secret || !redirectUri || !clientId) {
-        console.log("ENV VARIABLES ARE MISSING")
+        console.log('ENV VARIABLES ARE MISSING')
         return callback(null, {
             statusCode: 500,
-            body: "Spotify api not available"
+            body: 'Spotify api not available'
         })
     }
 
     const token = event.queryStringParameters.token
 
-    if (!token) return callback(null, {
-        statusCode: 200,
-        body: "token not received"
-    });
+    if (!token)
+        return callback(null, {
+            statusCode: 200,
+            body: 'token not received'
+        })
 
     const spotify = new SpotifyApi({
         clientId: clientId,
@@ -83,23 +80,23 @@ exports.handler = async function (event, context, callback) {
 
     const authorization = await spotify.authorizationCodeGrant(await token)
 
-    spotify.setAccessToken(authorization.body["access_token"])
+    spotify.setAccessToken(authorization.body['access_token'])
 
-    spotify.setRefreshToken(authorization.body["refresh_token"])
+    spotify.setRefreshToken(authorization.body['refresh_token'])
 
     try {
         await spotify.getMe()
 
         let tracks = {
-            short: await fetchTopTracks(spotify, "short_term"),
-            medium: await fetchTopTracks(spotify, "medium_term"),
-            long: await fetchTopTracks(spotify, "long_term")
+            short: await fetchTopTracks(spotify, 'short_term'),
+            medium: await fetchTopTracks(spotify, 'medium_term'),
+            long: await fetchTopTracks(spotify, 'long_term')
         }
 
         let artists = {
-            short: await fetchTopArtists(spotify, "short_term"),
-            medium: await fetchTopArtists(spotify, "medium_term"),
-            long: await fetchTopArtists(spotify, "long_term")
+            short: await fetchTopArtists(spotify, 'short_term'),
+            medium: await fetchTopArtists(spotify, 'medium_term'),
+            long: await fetchTopArtists(spotify, 'long_term')
         }
 
         callback(null, {
@@ -110,14 +107,11 @@ exports.handler = async function (event, context, callback) {
                 refresh_token: authorization.body.refresh_token
             })
         })
-
     } catch (err) {
         console.log(err)
         callback(null, {
             statusCode: 500,
-            body: "error"
+            body: 'error'
         })
     }
-
-
 }

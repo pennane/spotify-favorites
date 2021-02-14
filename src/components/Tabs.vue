@@ -1,80 +1,194 @@
 <template>
-  <div class="tabs">
-    <div class="tabs-header">
-      <div
-        v-for="(tab, index) in tabs"
-        :key="tab.title"
-        @click="selectTab(index)"
-        :class="{ 'tab-selected': index == selectedIndex }"
-      >
-        {{ tab.title }}
-      </div>
+    <div class="tabs">
+        <div :class="{ 'tabs--header': true, toggle, sticky }">
+            <div
+                v-for="(tab, i) in tabs"
+                :key="tab.title + '-' + i"
+                @click="selectTab(i)"
+                :class="{ 'tab-selected': i == currentTabIndex, toggle, 'tab-selector': true }"
+            >
+                {{ tab.title }}
+            </div>
+        </div>
+        <div :class="{ 'tabs--content': true, toggle }">
+            <slot></slot>
+        </div>
     </div>
-    <slot></slot>
-  </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      selectedIndex: 0, // the index of the selected tab,
-      tabs: [] // all of the tabs
-    };
-  },
-  created() {
-    this.tabs = this.$children;
-  },
-  mounted() {
-    this.selectTab(0);
-  },
-  methods: {
-    selectTab(i) {
-      this.selectedIndex = i;
-
-      // loop over all the tabs
-      this.tabs.forEach((tab, index) => {
-        tab.isActive = index === i;
-      });
+    data() {
+        return {
+            currentTabIndex: 0,
+            tabs: []
+        }
+    },
+    props: {
+        toggle: Boolean,
+        sticky: Boolean
+    },
+    methods: {
+        selectTab(i) {
+            this.currentTabIndex = i
+            this.tabs.forEach((tab, index) => {
+                tab.isActive = index === i
+                tab.current = i
+            })
+        }
+    },
+    created() {
+        this.tabs = this.$children
+    },
+    mounted() {
+        this.selectTab(0)
     }
-  }
-};
+}
 </script>
 
-<style>
-.tabs-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+<style lang="scss">
+$bgc: #3931c3;
+$bgc2: #3c25c0;
+$tabs-bg: white;
+$corner: 1rem;
+
+%corner-round-overlay {
+    content: '';
+    z-index: 2;
+    width: 2 * $corner;
+    height: 2 * $corner;
+    position: absolute;
+    background: var(--bg-color);
+    bottom: 0;
+    transition: all 0.3s;
 }
 
-.tabs-header > div {
-  padding: 15px 30px;
-  margin: 0;
-  display: inline-block;
-  margin-right: 5px;
-  cursor: pointer;
-  font-weight: 300;
-  width: 105px;
-  text-align: center;
+%corner-round-behind {
+    content: '';
+    z-index: 1;
+    width: 2 * $corner;
+    height: 2 * $corner;
+    position: absolute;
+    background: $bgc;
+    bottom: 0;
 }
 
-.tabs-header > .tab-selected {
-  font-weight: bold;
+.tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 0.15em;
+    color: black;
+
+    &--content {
+        &.toggle {
+            background-color: $bgc;
+            background: linear-gradient(180deg, $tabs-bg, $tabs-bg);
+
+            border-radius: 1rem 1rem;
+            padding-top: 1em;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.16);
+        }
+    }
+
+    &--header {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        &.sticky {
+            position: sticky;
+            top: 0;
+        }
+
+        & > div {
+            padding: 15px 30px;
+            margin: 0;
+            display: inline-block;
+            cursor: pointer;
+            font-weight: 300;
+            width: 105px;
+            text-align: center;
+        }
+
+        & > .tab-selector {
+            position: relative;
+            &:nth-child(1).toggle {
+                &::before {
+                    @extend %corner-round-behind;
+                    left: unset;
+                    right: 0px;
+                }
+                &::after {
+                    @extend %corner-round-overlay;
+                    left: unset;
+                    right: 0px;
+                    border-radius: 0 0 $corner 0;
+                }
+                &.tab-selected {
+                    &::before {
+                        right: unset;
+                        left: -2 * $corner;
+                    }
+                    &::after {
+                        right: unset;
+                        left: -2 * $corner;
+                        border-radius: 0 0 $corner 0;
+                    }
+                }
+            }
+            &:nth-child(2).toggle {
+                &::before {
+                    @extend %corner-round-behind;
+                    right: unset;
+                    left: 0px;
+                }
+                &::after {
+                    @extend %corner-round-overlay;
+                    right: unset;
+                    left: 0px;
+                    border-radius: 0 0 0 $corner;
+                }
+                &.tab-selected {
+                    &::before {
+                        left: unset;
+                        right: -2 * $corner;
+                    }
+                    &::after {
+                        left: unset;
+                        right: -2 * $corner;
+                        border-radius: 0 0 0 $corner;
+                    }
+                }
+            }
+            &.tab-selected {
+                font-weight: bold;
+                &.toggle {
+                    background: $bgc;
+                    border-radius: $corner $corner 0 0;
+                    color: white;
+                    position: relative;
+                }
+            }
+            &.toggle {
+                color: black;
+                font-weight: bold;
+            }
+        }
+    }
 }
 
-.tab {
-  display: inline-block;
-  color: black;
-  width: 100%;
-}
+@media screen and (max-width: 700px) {
+    .tabs--header > div {
+        width: 60px;
+        padding: 11px 0px;
+        text-align: center;
+        width: 25vw;
+    }
 
-@media screen and (max-width: 650px) {
-  .tabs-header {
-    margin: 0;
-  }
-  .tabs-header > div {
-    padding: 15px 10px;
-  }
+    .toggle.tabs--header > div {
+        width: 29vw;
+        padding: 14px 5px;
+    }
 }
 </style>
