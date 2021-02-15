@@ -79,12 +79,13 @@ export default {
 }
 
 .artists-wrapper {
-    display: flex;
-    flex-wrap: wrap;
     max-width: 80vw;
     width: 600px;
     padding: 0;
-    justify-content: center;
     margin-top: 1em;
+    display: grid;
+    grid-row-gap: 10px;
+    grid-template-columns: repeat(auto-fill, 120px);
+    justify-content: center;
 }
 </style>

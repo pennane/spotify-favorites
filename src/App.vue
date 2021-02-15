@@ -7,10 +7,10 @@
 <style lang="scss">
 :root {
     --bg-line-color: rgba(255, 255, 255, 0.03);
-    --bg-color: #2c2c96;
+    --bg-color: #2d2c96;
     --container-color: #3636bb;
     --container-fade: #3143b2;
-    --text-primary: #ffffff;
+    --text-primary: #fff;
     --text-secondary: #f2f2f2;
 }
 

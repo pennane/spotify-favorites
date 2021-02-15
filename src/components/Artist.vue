@@ -56,15 +56,7 @@ export default {
 .artist {
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
-    justify-content: flex-end;
-    width: 95px;
     align-items: center;
-    padding: 0.4em;
-    padding-top: 0.4em;
-    box-sizing: content-box;
-    margin: 0.1rem;
-    border-radius: 0.2rem;
 }
 
 .art {
@@ -83,7 +75,7 @@ export default {
 }
 
 span.position {
-    color: #aff8ca;
+    color: #98f6ba;
     font-weight: 600;
     text-align: center;
 }
@@ -116,7 +108,8 @@ div.position {
 }
 .artist-modal span {
     text-align: center;
-    font-weight: 200;
-    color: white;
+    font-weight: 450;
+    color: #98f6ba;
+    margin-top: 0.4em;
 }
 </style>

@@ -30,7 +30,7 @@ footer {
     bottom: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.1);
-    background: linear-gradient(294deg, #1f5ba7, #3c23c2);
+    background: linear-gradient(294deg, #2c3daf, #3243b2);
     color: white;
     font-family: 'inter';
     font-weight: 300;
