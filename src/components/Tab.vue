@@ -1,6 +1,6 @@
 <template>
     <transition name="tab-slide" mode="out-in">
-        <div class="tab" v-show="isActive">
+        <div class="tab" v-if="isActive">
             <slot></slot>
         </div>
     </transition>

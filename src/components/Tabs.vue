@@ -110,6 +110,7 @@ $corner: 1rem;
         & > .tab-selector {
             position: relative;
             color: var(--text-secondary);
+            white-space: nowrap;
             &:nth-child(1).toggle {
                 &::before {
                     @extend %corner-round-behind;
@@ -158,10 +159,10 @@ $corner: 1rem;
                     }
                 }
             }
+
             &.tab-selected {
                 font-weight: bold;
                 color: var(--text-primary);
-                white-space: nowrap;
                 &.toggle {
                     background: var(--container-color);
                     border-radius: $corner $corner 0 0;

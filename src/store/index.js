@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         accessToken: null,
-        data: null
+        data: null,
+        animations: []
     },
     mutations: {
         setAccessToken(state, token) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
         },
         setData(state, data) {
             state.data = data
+        },
+        pushPlayedAnimation(state, animation) {
+            state.animations = state.animations.concat(animation)
         }
     }
 })

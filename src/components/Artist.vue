@@ -61,9 +61,8 @@ export default {
 
 .art {
     box-sizing: border-box;
-    padding: 0.2em;
-    width: 90px;
-    height: 90px;
+    width: var(--image-size);
+    height: var(--image-size);
 }
 
 .cover-image {
@@ -72,6 +71,7 @@ export default {
     height: 100%;
     display: block;
     cursor: pointer;
+    background-color: #ffffff05;
 }
 
 span.position {
@@ -111,5 +111,8 @@ div.position {
     font-weight: 450;
     color: #98f6ba;
     margin-top: 0.4em;
+}
+
+@keyframes artist-fade-in {
 }
 </style>
