@@ -1,7 +1,7 @@
 <template>
     <div class="artist item" :title="artistName">
         <div class="position">
-            <span>{{ position }}</span>
+            <span class="position">{{ position }}</span>
         </div>
         <div class="art">
             <img
@@ -43,7 +43,7 @@ export default {
         }
     },
     methods: {
-        openArtist: function () {
+        openArtist: function() {
             this.closed = false
         },
         onClickOutside() {
@@ -60,6 +60,11 @@ export default {
     justify-content: flex-end;
     width: 95px;
     align-items: center;
+    padding: 0.4em;
+    padding-top: 0.4em;
+    box-sizing: content-box;
+    margin: 0.1rem;
+    border-radius: 0.2rem;
 }
 
 .art {
@@ -77,10 +82,14 @@ export default {
     cursor: pointer;
 }
 
-.position {
-    color: #3734ba;
-    font-weight: 450;
+span.position {
+    color: #aff8ca;
+    font-weight: 600;
     text-align: center;
+}
+
+div.position {
+    margin-bottom: 0.6rem;
 }
 
 .artist-modal {

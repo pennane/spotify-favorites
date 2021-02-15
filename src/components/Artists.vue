@@ -75,6 +75,7 @@ export default {
     width: 800px;
     max-width: 90vw;
     box-sizing: border-box;
+    padding-bottom: 2rem;
 }
 
 .artists-wrapper {
@@ -84,5 +85,6 @@ export default {
     width: 600px;
     padding: 0;
     justify-content: center;
+    margin-top: 1em;
 }
 </style>

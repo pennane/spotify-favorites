@@ -68,13 +68,13 @@ export default {
 
 .name {
     font-weight: 500;
-    color: rgb(37, 37, 37);
+    color: var(--text-primary);
     box-sizing: border-box;
     padding-right: 2em;
 }
 
 .artist {
-    color: #0d0d0d;
+    color: var(--text-secondary);
     font-weight: 350;
     display: block;
 }

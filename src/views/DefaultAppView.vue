@@ -98,7 +98,6 @@ main {
     font-size: 0.9em;
     padding: 0.88rem 1.44rem;
     cursor: pointer;
-    border: 2px solid transparent;
 
     &:hover {
     }

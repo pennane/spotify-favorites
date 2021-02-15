@@ -26,7 +26,7 @@ export default {
     display: block;
     margin-top: 1.5em;
     font-weight: 300;
-    color: #171717;
+    color: var(--text-secondary);
     margin-bottom: 0.3em;
 }
 </style>

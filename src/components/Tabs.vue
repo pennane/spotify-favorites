@@ -47,9 +47,6 @@ export default {
 </script>
 
 <style lang="scss">
-$bgc: #3931c3;
-$bgc2: #3c25c0;
-$tabs-bg: white;
 $corner: 1rem;
 
 %corner-round-overlay {
@@ -69,7 +66,7 @@ $corner: 1rem;
     width: 2 * $corner;
     height: 2 * $corner;
     position: absolute;
-    background: $bgc;
+    background: var(--container-color);
     bottom: 0;
 }
 
@@ -82,9 +79,8 @@ $corner: 1rem;
 
     &--content {
         &.toggle {
-            background-color: $bgc;
-            background: linear-gradient(180deg, $tabs-bg, $tabs-bg);
-
+            background-color: var(--container-color);
+            background: linear-gradient(180deg, var(--container-color), var(--container-fade));
             border-radius: 1rem 1rem;
             padding-top: 1em;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.16);
@@ -113,6 +109,7 @@ $corner: 1rem;
 
         & > .tab-selector {
             position: relative;
+            color: var(--text-secondary);
             &:nth-child(1).toggle {
                 &::before {
                     @extend %corner-round-behind;
@@ -163,15 +160,15 @@ $corner: 1rem;
             }
             &.tab-selected {
                 font-weight: bold;
+                color: var(--text-primary);
+                white-space: nowrap;
                 &.toggle {
-                    background: $bgc;
+                    background: var(--container-color);
                     border-radius: $corner $corner 0 0;
-                    color: white;
                     position: relative;
                 }
             }
             &.toggle {
-                color: black;
                 font-weight: bold;
             }
         }
