@@ -1,29 +1,6 @@
-# vue-spotify-favorites
+# Spotify Favorites
+Displays what you have been listening to the most, now and last year.
 
-## Project setup
-```
-npm install
-```
+[Found here](https://spotifyfavorites.pennanen.dev/)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![Site preview](https://i.imgur.com/LrSG2w7.png)
