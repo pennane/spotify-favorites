@@ -17,7 +17,6 @@ export default {
             const store = parent.$store
             let animationRan = store.state.animations.indexOf(props.storeTarget) !== -1
             if (!animationRan) {
-                console.log('animating ', props.storeTarget)
                 animate(children).then(() => {
                     setTimeout(() => {
                         store.commit('pushPlayedAnimation', props.storeTarget)
@@ -25,7 +24,6 @@ export default {
                 })
             }
         } else {
-            console.log('animating not once')
             animate(children)
         }
         return createElement('span', children)

@@ -67,30 +67,30 @@ export default {
                 this.error = e
             }
         },
-        setToken: function (token) {
+        setToken: function(token) {
             this.$store.commit('setAccessToken', token)
         },
-        setData: function (data) {
+        setData: function(data) {
             this.$store.commit('setData', data)
         }
     },
     computed: {
-        data: function () {
+        data: function() {
             return this.$store.state.data
         },
-        accessToken: function () {
+        accessToken: function() {
             return this.$store.state.accessToken
         },
-        redirectUrl: function () {
-            return 'https://spotifyfavorites.pennanen.dev/'
+        redirectUrl: function() {
+            return 'http://localhost:8888/'
         },
-        spotifyUrl: function () {
+        spotifyUrl: function() {
             return `https://accounts.spotify.com/authorize?response_type=code&client_id=a3e009b8a73a416387140f5830d1862e&scope=${encodeURIComponent(
                 this.permissions
             )}&redirect_uri=${encodeURIComponent(this.redirectUrl)}`
         }
     },
-    created: function () {
+    created: function() {
         if (this.$route.query && this.$route.query.code) {
             this.setToken(this.$route.query.code)
             let query = Object.assign({}, this.$route.query)
@@ -105,6 +105,7 @@ export default {
 .favorites-content {
     padding-bottom: 8em;
 }
+
 .error-message {
     color: #dc2626;
 }

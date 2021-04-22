@@ -55,9 +55,8 @@ async function fetchTopArtists(spotify, range) {
     return artists
 }
 
-exports.handler = async function (event, context, callback) {
+exports.handler = async function(event, context, callback) {
     if (!secret || !redirectUri || !clientId) {
-        console.log('ENV VARIABLES ARE MISSING')
         return callback(null, {
             statusCode: 500,
             body: 'Spotify api not available'
@@ -108,7 +107,6 @@ exports.handler = async function (event, context, callback) {
             })
         })
     } catch (err) {
-        console.log(err)
         callback(null, {
             statusCode: 500,
             body: 'error'
