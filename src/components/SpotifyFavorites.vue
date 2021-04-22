@@ -82,7 +82,7 @@ export default {
             return this.$store.state.accessToken
         },
         redirectUrl: function() {
-            return 'http://localhost:8888/'
+            return 'https://spotifyfavorites.pennanen.dev/'
         },
         spotifyUrl: function() {
             return `https://accounts.spotify.com/authorize?response_type=code&client_id=a3e009b8a73a416387140f5830d1862e&scope=${encodeURIComponent(
