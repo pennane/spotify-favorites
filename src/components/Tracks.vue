@@ -1,56 +1,49 @@
 <template>
     <div class="tracks flexCenterParent">
-        <!-- <h2>Tracks</h2> -->
         <Tabs v-if="tracks">
             <Tab title="Short term">
                 <Term term="4 weeks">
-                    <div class="tracks-wrapper">
-                        <SequentialEntrance storeTarget="tracks-short">
-                            <div class="track-wrapper" v-for="(n, i) in 50" :key="'track-row-' + i">
-                                <Track
-                                    v-if="tracks.short[i]"
-                                    :imageUrl="tracks.short[i].imgurl"
-                                    :trackName="tracks.short[i].name"
-                                    :artists="tracks.short[i].artists"
-                                    :position="tracks.short[i].position"
-                                />
-                            </div>
-                        </SequentialEntrance>
-                    </div>
+                    <SequentialEntrance storeTarget="tracks-short" className="tracks-wrapper">
+                        <div class="track-wrapper" v-for="(n, i) in 50" :key="'track-row-' + i">
+                            <Track
+                                v-if="tracks.short[i]"
+                                :imageUrl="tracks.short[i].imgurl"
+                                :trackName="tracks.short[i].name"
+                                :artists="tracks.short[i].artists"
+                                :position="tracks.short[i].position"
+                            />
+                        </div>
+                    </SequentialEntrance>
                 </Term>
             </Tab>
             <Tab title="Medium term">
                 <Term term="6 months">
-                    <div class="tracks-wrapper">
-                        <SequentialEntrance storeTarget="tracks-medium">
-                            <div class="track-wrapper" v-for="(n, i) in 50" :key="'track-row-' + i">
-                                <Track
-                                    v-if="tracks.medium[i]"
-                                    :imageUrl="tracks.medium[i].imgurl"
-                                    :trackName="tracks.medium[i].name"
-                                    :artists="tracks.medium[i].artists"
-                                    :position="tracks.medium[i].position"
-                                />
-                            </div>
-                        </SequentialEntrance>
-                    </div>
+                    <SequentialEntrance storeTarget="tracks-medium" className="tracks-wrapper">
+                        <div class="track-wrapper" v-for="(n, i) in 50" :key="'track-row-' + i">
+                            <Track
+                                v-if="tracks.medium[i]"
+                                :imageUrl="tracks.medium[i].imgurl"
+                                :trackName="tracks.medium[i].name"
+                                :artists="tracks.medium[i].artists"
+                                :position="tracks.medium[i].position"
+                            />
+                        </div>
+                    </SequentialEntrance>
                 </Term>
             </Tab>
             <Tab title="Long term">
                 <Term term="few years">
-                    <div class="tracks-wrapper">
-                        <SequentialEntrance storeTarget="tracks-long">
-                            <div class="track-wrapper" v-for="(n, i) in 50" :key="'track-row-' + i">
-                                <Track
-                                    v-if="tracks.long[i]"
-                                    :imageUrl="tracks.long[i].imgurl"
-                                    :trackName="tracks.long[i].name"
-                                    :artists="tracks.long[i].artists"
-                                    :position="tracks.long[i].position"
-                                />
-                            </div>
-                        </SequentialEntrance>
-                    </div>
+                    <SequentialEntrance storeTarget="tracks-long" className="tracks-wrapper">
+                        <div class="track-wrapper" v-for="(n, i) in 50" :key="'track-row-' + i">
+                            <Track
+                                v-if="tracks.long[i]"
+                                :imageUrl="tracks.long[i].imgurl"
+                                :trackName="tracks.long[i].name"
+                                :artists="tracks.long[i].artists"
+                                :position="tracks.long[i].position"
+                            />
+                        </div>
+                    </SequentialEntrance>
                 </Term>
             </Tab>
         </Tabs>

@@ -1,4 +1,7 @@
 const SpotifyApi = require('spotify-web-api-node')
+if (process.NODE_ENV === 'development') {
+    require('dotenv').config()
+}
 const redirectUri = process.env.REDIRECT_URI
 const clientId = process.env.SPOTIFY_CLIENT_ID
 const secret = process.env.SPOTIFY_SECRET

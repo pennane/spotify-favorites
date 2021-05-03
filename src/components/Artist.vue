@@ -5,7 +5,7 @@
         </div>
         <div class="art">
             <img
-                @click="closed = false"
+                @click="openArtist()"
                 class="cover-image"
                 :src="imageUrl"
                 :alt="'Cover for ' + artistName"
@@ -46,8 +46,11 @@ export default {
         openArtist: function() {
             this.closed = false
         },
-        onClickOutside() {
+        closeArtist: function() {
             this.closed = true
+        },
+        onClickOutside() {
+            this.closeArtist()
         }
     }
 }
@@ -71,7 +74,8 @@ export default {
     height: 100%;
     display: block;
     cursor: pointer;
-    background-color: #ffffff05;
+    background-color: #2f35a7;
+    object-fit: cover;
 }
 
 span.position {

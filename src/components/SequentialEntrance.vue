@@ -26,7 +26,13 @@ export default {
         } else {
             animate(children)
         }
-        return createElement('span', children)
+        return createElement(
+            'div',
+            {
+                attrs: { class: props.className }
+            },
+            children
+        )
     }
 }
 </script>

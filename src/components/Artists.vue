@@ -4,8 +4,7 @@
         <Tabs v-if="artists">
             <Tab title="Short term">
                 <Term term="4 weeks">
-                    <div class="artists-wrapper">
-                        <!-- <SequentialEntrance storeTarget="artists-short"> -->
+                    <SequentialEntrance storeTarget="artists-short" className="artists-wrapper">
                         <div v-for="(n, i) in 50" class="artist-wrapper" :key="i + '-short-artist'">
                             <Artist
                                 v-if="artists.short[i]"
@@ -15,14 +14,12 @@
                                 :position="artists.short[i].position"
                             />
                         </div>
-                        <!-- </SequentialEntrance> -->
-                    </div>
+                    </SequentialEntrance>
                 </Term>
             </Tab>
             <Tab title="Medium term">
                 <Term term="6 months">
-                    <div class="artists-wrapper">
-                        <!-- <SequentialEntrance storeTarget="artists-medium"> -->
+                    <SequentialEntrance storeTarget="artists-medium" className="artists-wrapper">
                         <div v-for="(n, i) in 50" class="artist-wrapper" :key="i + '-medium-artist'">
                             <Artist
                                 v-if="artists.medium[i]"
@@ -32,14 +29,12 @@
                                 :position="artists.medium[i].position"
                             />
                         </div>
-                        <!-- </SequentialEntrance> -->
-                    </div>
+                    </SequentialEntrance>
                 </Term>
             </Tab>
             <Tab title="Long term">
                 <Term term="few years">
-                    <div class="artists-wrapper">
-                        <!-- <SequentialEntrance storeTarget="artists-long"> -->
+                    <SequentialEntrance storeTarget="artists-long" className="artists-wrapper">
                         <div v-for="(n, i) in 50" class="artist-wrapper" :key="i + '-long-artist'">
                             <Artist
                                 v-if="artists.long[i]"
@@ -49,8 +44,7 @@
                                 :position="artists.long[i].position"
                             />
                         </div>
-                        <!-- </SequentialEntrance> -->
-                    </div>
+                    </SequentialEntrance>
                 </Term>
             </Tab>
         </Tabs>
@@ -62,7 +56,7 @@ import Artist from '@/components/Artist.vue'
 import Tabs from '@/components/Tabs.vue'
 import Tab from '@/components/Tab.vue'
 import Term from '@/components/Term.vue'
-// import SequentialEntrance from '@/components/SequentialEntrance.vue'
+import SequentialEntrance from '@/components/SequentialEntrance.vue'
 
 export default {
     name: 'Artists',
@@ -71,8 +65,14 @@ export default {
         Tabs,
         Tab,
         Term,
-        Artist
-        // SequentialEntrance
+        Artist,
+        SequentialEntrance
+    },
+    data() {
+        return {
+            closed: true,
+            transitioning: false
+        }
     }
 }
 </script>

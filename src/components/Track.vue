@@ -39,9 +39,9 @@ export default {
 
 <style scoped lang="scss">
 .item {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr 8fr 1fr;
     padding-bottom: 0.4em;
     min-height: 61px;
     padding-top: 7px;
@@ -49,6 +49,8 @@ export default {
 
 .cover-image {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background-color: #2f35a7;
+    object-fit: cover;
 }
 
 .art {
