@@ -82,7 +82,7 @@ export default {
             return this.$store.state.accessToken
         },
         redirectUrl: function() {
-            return 'http://localhost:8888/'
+            // return 'http://localhost:8888/'
             return 'https://spotifyfavorites.pennanen.dev/'
         },
         spotifyUrl: function() {
