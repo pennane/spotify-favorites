@@ -1,7 +1,9 @@
 const SpotifyApi = require('spotify-web-api-node')
+
 if (process.NODE_ENV === 'development') {
     require('dotenv').config()
 }
+
 const redirectUri = process.env.REDIRECT_URI
 const clientId = process.env.SPOTIFY_CLIENT_ID
 const secret = process.env.SPOTIFY_SECRET
@@ -30,32 +32,21 @@ const artistToObject = (item, i) => {
 }
 
 async function fetchTopTracks(spotify, range) {
-    let tracks = []
-    let topTracks = await spotify.getMyTopTracks({
-        limit: 50,
-        time_range: range
-    })
-
-    topTracks.body.items.forEach((item, i) => {
-        tracks.push(trackToObject(item, i))
-    })
-
-    return tracks
+    return await spotify
+        .getMyTopTracks({
+            limit: 50,
+            time_range: range
+        })
+        .map(trackToObject)
 }
 
 async function fetchTopArtists(spotify, range) {
-    let artists = []
-
-    let topArtists = await spotify.getMyTopArtists({
-        limit: 50,
-        time_range: range
-    })
-
-    topArtists.body.items.forEach((item, i) => {
-        artists.push(artistToObject(item, i))
-    })
-
-    return artists
+    return await spotify
+        .getMyTopArtists({
+            limit: 50,
+            time_range: range
+        })
+        .map(artistToObject)
 }
 
 exports.handler = async function(event, context, callback) {
@@ -71,7 +62,7 @@ exports.handler = async function(event, context, callback) {
     if (!token)
         return callback(null, {
             statusCode: 200,
-            body: 'token not received'
+            body: 'Token was not passed'
         })
 
     const spotify = new SpotifyApi({
@@ -83,31 +74,28 @@ exports.handler = async function(event, context, callback) {
     const authorization = await spotify.authorizationCodeGrant(await token)
 
     spotify.setAccessToken(authorization.body['access_token'])
-
     spotify.setRefreshToken(authorization.body['refresh_token'])
 
     try {
         await spotify.getMe()
 
-        let tracks = {
-            short: await fetchTopTracks(spotify, 'short_term'),
-            medium: await fetchTopTracks(spotify, 'medium_term'),
-            long: await fetchTopTracks(spotify, 'long_term')
-        }
-
-        let artists = {
-            short: await fetchTopArtists(spotify, 'short_term'),
-            medium: await fetchTopArtists(spotify, 'medium_term'),
-            long: await fetchTopArtists(spotify, 'long_term')
-        }
+        const body = JSON.stringify({
+            tracks: {
+                short: await fetchTopTracks(spotify, 'short_term'),
+                medium: await fetchTopTracks(spotify, 'medium_term'),
+                long: await fetchTopTracks(spotify, 'long_term')
+            },
+            artists: {
+                short: await fetchTopArtists(spotify, 'short_term'),
+                medium: await fetchTopArtists(spotify, 'medium_term'),
+                long: await fetchTopArtists(spotify, 'long_term')
+            },
+            refresh_token: authorization.body.refresh_token
+        })
 
         callback(null, {
             statusCode: 200,
-            body: JSON.stringify({
-                tracks: await tracks,
-                artists: await artists,
-                refresh_token: authorization.body.refresh_token
-            })
+            body
         })
     } catch (err) {
         callback(null, {
